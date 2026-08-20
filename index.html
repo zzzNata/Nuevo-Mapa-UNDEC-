@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Correlativas – Tecnicatura en Desarrollo Web</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#070d1a">
+</head>
+
+<body>
+
+  <div id="pantallaLogin">
+    <div id="loginCard">
+      <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
+      <h1>Tecnicatura en <span>Desarrollo Web</span></h1>
+      <div class="login-subtitle">// REGISTRO DE ALUMNO</div>
+      <div class="login-field">
+        <label>Nombre</label>
+        <input type="text" id="nombre" placeholder="Tu nombre">
+      </div>
+      <div class="login-field">
+        <label>Apellido</label>
+        <input type="text" id="apellido" placeholder="Tu apellido">
+      </div>
+      <button id="loginBtn" onclick="registrar()">Iniciar →</button>
+      <button id="yaTengoBtn" onclick="mostrarUsuarios()">Ya tengo cuenta</button>
+      <div id="listaUsuarios"></div>
+    </div>
+  </div>
+
+  <div id="menuPrincipal">
+
+    <h2>¿Qué querés consultar?</h2>
+
+    <button class="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
+
+    <div class="opciones-menu">
+
+        <div class="opcion-menu" onclick="entrarMaterias()">
+            <div class="icono-opcion">📚</div>
+            <h3>Materias</h3>
+        </div>
+
+        <div class="opcion-menu" onclick="entrarHorarios()">
+            <div class="icono-opcion">📅</div>
+            <h3>Horarios</h3>
+        </div>
+
+    </div>
+
+  </div>
+
+  <div id="mapaMaterias">
+    <div class="scan-line"></div>
+    <header>
+      <button class="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
+      <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
+      <h1>Tecnicatura en <span>Desarrollo Web</span></h1>
+      <div class="subtitle">// MAPA DE CORRELATIVAS INTERACTIVO — CLICK EN CUALQUIER MATERIA</div>
+      <button class="volver-btn" onclick="volverMenu()">← Volver</button>
+    </header>
+
+    <div class="info-bar">
+      <div class="info-stat">
+        <div class="val">16</div>
+        <div class="lbl">Materias</div>
+      </div>
+      <div class="info-stat">
+        <div class="val">2</div>
+        <div class="lbl">Años</div>
+      </div>
+      <div class="info-stat">
+        <div class="val" id="statAprobadas">0 / 16</div>
+        <div class="lbl">Aprobadas</div>
+      </div>
+      <div class="info-stat">
+        <div class="val">4</div>
+        <div class="lbl">Cuatrimestres</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(0,212,255,0.3);border-color:#00d4ff"></div>
+        <span style="color:#00d4ff">Seleccionada</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(255,107,53,0.3);border-color:#ff6b35"></div>
+        <span style="color:#ff6b35">Req. para cursar</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(0,255,157,0.3);border-color:#00ff9d"></div>
+        <span style="color:#00ff9d">Se desbloquea</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:rgba(255,255,255,0.05);border-color:#4a7a9b"></div>
+        <span style="color:#4a7a9b">Sin relación</span>
+      </div>
+    </div>
+
+    <div class="hint">▸ Hacé click en una materia para ver sus correlativas en detalle</div>
+
+    <div class="map-container">
+      <div class="years-grid" id="yearsGrid"></div>
+    </div>
+  </div>
+
+  <div id="pantallaHorarios">
+
+    <button class="volver-btn" onclick="volverMenu()">← Volver</button>
+    <button class="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
+
+    <div class="encabezado-horarios">
+
+        <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
+
+        <h1>Agenda <span>Semanal</span></h1>
+
+        <div class="subtitle">// HORARIOS DEL CUATRIMESTRE</div>
+
+        <button
+        class="boton-editar-horarios"
+        id="botonEditarHorarios"
+        onclick="abrirPanelEdicionHorarios()">
+        ✎ Editar horarios
+      </button>
+
+    </div>
+
+    <div id="agendaSemanal">
+
+        <div class="columna-dia">
+            <div class="dia-header">Lunes</div>
+            <div class="dia-contenido" data-dia="Lunes"></div>
+        </div>
+
+        <div class="columna-dia">
+            <div class="dia-header">Martes</div>
+            <div class="dia-contenido" data-dia="Martes"></div>
+        </div>
+
+        <div class="columna-dia">
+            <div class="dia-header">Miércoles</div>
+            <div class="dia-contenido" data-dia="Miércoles"></div>
+        </div>
+
+        <div class="columna-dia">
+            <div class="dia-header">Jueves</div>
+            <div class="dia-contenido" data-dia="Jueves"></div>
+        </div>
+
+        <div class="columna-dia">
+            <div class="dia-header">Viernes</div>
+            <div class="dia-contenido" data-dia="Viernes"></div>
+        </div>
+
+    </div>
+
+  </div>
+
+  <!-- Reemplazar/Agregar dentro de index.html antes del overlay -->
+<div id="pantallaHorarios">
+
+    <button class="cerrarSesion" onclick="volverMenu()">← Volver</button>
+
+    <div class="encabezado-horarios">
+        <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
+        <h1>Agenda <span>Semanal</span></h1>
+        <div class="subtitle">// HORARIOS DEL CUATRIMESTRE</div>
+
+        <button class="boton-editar-horarios" id="botonEditarHorarios" onclick="abrirPanelEdicionHorarios()">
+          ✎ Administrar Horarios
+        </button>
+    </div>
+
+    <div id="agendaSemanal">
+        <div class="columna-dia">
+            <div class="dia-header">Lunes</div>
+            <div class="dia-contenido" data-dia="Lunes"></div>
+        </div>
+        <div class="columna-dia">
+            <div class="dia-header">Martes</div>
+            <div class="dia-contenido" data-dia="Martes"></div>
+        </div>
+        <div class="columna-dia">
+            <div class="dia-header">Miércoles</div>
+            <div class="dia-contenido" data-dia="Miércoles"></div>
+        </div>
+        <div class="columna-dia">
+            <div class="dia-header">Jueves</div>
+            <div class="dia-contenido" data-dia="Jueves"></div>
+        </div>
+        <div class="columna-dia">
+            <div class="dia-header">Viernes</div>
+            <div class="dia-contenido" data-dia="Viernes"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- PANEL / MODAL PARA ADMINISTRAR Y EDITAR HORARIOS -->
+<div class="panel-edicion-overlay" id="overlayHorarios" onclick="cerrarPanelEdicionHorarios()"></div>
+
+<div class="panel-edicion-horarios" id="modalEdicionHorarios">
+    <button class="close-btn" onclick="cerrarPanelEdicionHorarios()">✕</button>
+    
+    <h2 id="tituloFormHorario">// AGREGAR NUEVA CLASE</h2>
+    
+    <form id="formHorario" onsubmit="guardarHorario(event)">
+        <input type="hidden" id="horarioEditIndex" value="-1">
+
+        <div class="form-group">
+            <label>Materia</label>
+            <select id="selectMateria" required></select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Día</label>
+                <select id="selectDia" required>
+                    <option value="Lunes">Lunes</option>
+                    <option value="Martes">Martes</option>
+                    <option value="Miércoles">Miércoles</option>
+                    <option value="Jueves">Jueves</option>
+                    <option value="Viernes">Viernes</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Modalidad</label>
+                <select id="selectModalidad" required>
+                    <option value="Virtual">Virtual</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Híbrida">Híbrida</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Hora Inicio</label>
+                <input type="time" id="inputInicio" required>
+            </div>
+
+            <div class="form-group">
+                <label>Hora Fin</label>
+                <input type="time" id="inputFin" required>
+            </div>
+        </div>
+
+        <div class="form-acciones">
+            <button type="submit" class="btn-guardar" id="btnGuardarHorario">+ Agregar Clase</button>
+            <button type="button" class="btn-cancelar" id="btnCancelarEdicion" onclick="resetearFormularioHorario()" style="display: none;">Cancelar Edición</button>
+        </div>
+    </form>
+
+    <div class="lista-horarios-administrar">
+        <h3>// MIS CLASES CARGADAS</h3>
+        <div id="contenedorListaHorarios"></div>
+    </div>
+  </div>
+  
+
+  <div class="detail-overlay" id="overlay" onclick="closeDetail()"></div>
+  <div class="detail-panel" id="detailPanel">
+    <button class="close-btn" onclick="closeDetail()">✕</button>
+    <div class="detail-num" id="dNum"></div>
+    <div class="detail-name" id="dName"></div>
+    <div class="detail-meta" id="dMeta"></div>
+    <div id="dCursarSection" class="detail-section"></div>
+    <div id="dRendirSection" class="detail-section"></div>
+    <div id="dUnlocksSection" class="detail-section"></div>
+    <div class="detail-section-title">Estado de la Materia</div>
+    <div class="state-selector">
+      <button class="state-btn" onclick="setMateriaState('sin_cursar')" data-state="sin_cursar">Sin Cursar</button>
+      <button class="state-btn" onclick="setMateriaState('cursando')" data-state="cursando">Cursando</button>
+      <button class="state-btn" onclick="setMateriaState('aprobadas')" data-state="aprobadas">Aprobada</button>
+      <button class="state-btn" onclick="setMateriaState('reprobadas')" data-state="reprobadas">Reprobada</button>
+    </div>
+  </div>
+
+</body>
+<script src="js/app.js"></script>
+</html>
