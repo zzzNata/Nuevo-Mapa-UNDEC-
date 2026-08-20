@@ -1,0 +1,21 @@
+{
+  "short_name": "UNdeC DW",
+  "name": "UNdeC — Tecnicatura en Desarrollo Web",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#070d1a",
+  "theme_color": "#070d1a",
+  "display": "standalone",
+  "orientation": "portrait"
+}
