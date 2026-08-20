@@ -107,107 +107,41 @@
     }
 
     function mostrarHorarios() {
+  const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
-      const dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+  dias.forEach(dia => {
+    const contenedor = document.querySelector(`.dia-contenido[data-dia="${dia}"]`);
+    if (!contenedor) return;
 
-      dias.forEach(dia => {
+    contenedor.innerHTML = "";
 
-        const contenedor = document.querySelector(
-            `.dia-contenido[data-dia="${dia}"]`
-        );
+    const horariosDelDia = estudiante.horarios.filter(horario => horario.dia === dia);
 
-        if (!contenedor) return;
+    if (horariosDelDia.length === 0) {
+      contenedor.innerHTML = `<div class="dia-vacio">Sin clases</div>`;
+      return;
+    }
 
-        // Limpiar el día antes de cargar los horarios
-        contenedor.innerHTML = "";
+    horariosDelDia.sort((a, b) => a.inicio.localeCompare(b.inicio));
 
-        const horariosDelDia = estudiante.horarios.filter(
-            horario => horario.dia === dia
-        );
+    horariosDelDia.forEach(horario => {
+      const clase = document.createElement("div");
+      clase.className = "clase-agenda";
 
-        // Si no hay clases ese día
-        if (horariosDelDia.length === 0) {
+      clase.innerHTML = `
+        <div class="clase-hora">${horario.inicio} — ${horario.fin}</div>
+        <div class="clase-materia">${horario.materia}</div>
+        <div class="clase-modalidad">${horario.modalidad}</div>
+      `;
 
-            contenedor.innerHTML = `
-                <div class="dia-vacio">
-                    Sin clases
-                </div>
-            `;
+      const materia = subjects.find(subject => subject.name === horario.materia);
+      if (materia) {
+        clase.onclick = () => showDetail(materia.id);
+      }
 
-            return;
-        }
-
-        // Ordenar horarios por hora de inicio
-        horariosDelDia.sort((a, b) =>
-            a.inicio.localeCompare(b.inicio)
-        );
-
-        // Crear cada clase
-        horariosDelDia.forEach(horario => {
-
-            const clase = document.createElement("div");
-
-            clase.className = "clase-agenda";
-
-            // Buscar la posición real del horario
-            const indiceHorario = estudiante.horarios.indexOf(horario);
-
-            clase.innerHTML = `
-                <div class="clase-hora">
-                    ${horario.inicio} — ${horario.fin}
-                </div>
-
-                <div class="clase-materia">
-                    ${horario.materia}
-                </div>
-
-                <div class="clase-modalidad">
-                    ${horario.modalidad}
-                </div>
-
-                ${
-                    modoEdicionHorarios
-                    ? `
-                        <div class="controles-horario">
-
-                            <button
-                                class="boton-editar-clase"
-                                onclick="event.stopPropagation(); editarHorario(${indiceHorario})">
-                                ✎ Editar
-                            </button>
-
-                            <button
-                                class="boton-eliminar-clase"
-                                onclick="event.stopPropagation(); eliminarHorario(${indiceHorario})">
-                                🗑 Eliminar
-                            </button>
-
-                        </div>
-                    `
-                    : ""
-                }
-            `;
-
-            // Buscar la materia correspondiente
-            const materia = subjects.find(
-                subject => subject.name === horario.materia
-            );
-
-            // Si encontramos la materia,
-            // podemos abrir su detalle
-            if (materia) {
-
-                clase.onclick = () => {
-                    showDetail(materia.id);
-                };
-
-            }
-
-            contenedor.appendChild(clase);
-
-        });
-
+      contenedor.appendChild(clase);
     });
+  });
 }
   
 

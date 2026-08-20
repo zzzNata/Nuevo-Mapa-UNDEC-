@@ -32,25 +32,18 @@
   </div>
 
   <div id="menuPrincipal">
-
-    <h2>¿Qué querés consultar?</h2>
-
     <button class="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
-
+    <h2>¿Qué querés consultar?</h2>
     <div class="opciones-menu">
-
         <div class="opcion-menu" onclick="entrarMaterias()">
             <div class="icono-opcion">📚</div>
             <h3>Materias</h3>
         </div>
-
         <div class="opcion-menu" onclick="entrarHorarios()">
             <div class="icono-opcion">📅</div>
             <h3>Horarios</h3>
         </div>
-
     </div>
-
   </div>
 
   <div id="mapaMaterias">
@@ -109,68 +102,13 @@
   </div>
 
   <div id="pantallaHorarios">
-
     <button class="volver-btn" onclick="volverMenu()">← Volver</button>
     <button class="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
 
     <div class="encabezado-horarios">
-
-        <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
-
-        <h1>Agenda <span>Semanal</span></h1>
-
-        <div class="subtitle">// HORARIOS DEL CUATRIMESTRE</div>
-
-        <button
-        class="boton-editar-horarios"
-        id="botonEditarHorarios"
-        onclick="abrirPanelEdicionHorarios()">
-        ✎ Editar horarios
-      </button>
-
-    </div>
-
-    <div id="agendaSemanal">
-
-        <div class="columna-dia">
-            <div class="dia-header">Lunes</div>
-            <div class="dia-contenido" data-dia="Lunes"></div>
-        </div>
-
-        <div class="columna-dia">
-            <div class="dia-header">Martes</div>
-            <div class="dia-contenido" data-dia="Martes"></div>
-        </div>
-
-        <div class="columna-dia">
-            <div class="dia-header">Miércoles</div>
-            <div class="dia-contenido" data-dia="Miércoles"></div>
-        </div>
-
-        <div class="columna-dia">
-            <div class="dia-header">Jueves</div>
-            <div class="dia-contenido" data-dia="Jueves"></div>
-        </div>
-
-        <div class="columna-dia">
-            <div class="dia-header">Viernes</div>
-            <div class="dia-contenido" data-dia="Viernes"></div>
-        </div>
-
-    </div>
-
-  </div>
-
-  <!-- Reemplazar/Agregar dentro de index.html antes del overlay -->
-<div id="pantallaHorarios">
-
-    <button class="cerrarSesion" onclick="volverMenu()">← Volver</button>
-
-    <div class="encabezado-horarios">
         <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
         <h1>Agenda <span>Semanal</span></h1>
         <div class="subtitle">// HORARIOS DEL CUATRIMESTRE</div>
-
         <button class="boton-editar-horarios" id="botonEditarHorarios" onclick="abrirPanelEdicionHorarios()">
           ✎ Administrar Horarios
         </button>
@@ -198,17 +136,16 @@
             <div class="dia-contenido" data-dia="Viernes"></div>
         </div>
     </div>
+  </div>
 
-</div>
+  <!-- PANEL / MODAL PARA ADMINISTRAR Y EDITAR HORARIOS -->
+  <div class="panel-edicion-overlay" id="overlayHorarios" onclick="cerrarPanelEdicionHorarios()"></div>
 
-<!-- PANEL / MODAL PARA ADMINISTRAR Y EDITAR HORARIOS -->
-<div class="panel-edicion-overlay" id="overlayHorarios" onclick="cerrarPanelEdicionHorarios()"></div>
-
-<div class="panel-edicion-horarios" id="modalEdicionHorarios">
+  <div class="panel-edicion-horarios" id="modalEdicionHorarios">
     <button class="close-btn" onclick="cerrarPanelEdicionHorarios()">✕</button>
-    
+
     <h2 id="tituloFormHorario">// AGREGAR NUEVA CLASE</h2>
-    
+
     <form id="formHorario" onsubmit="guardarHorario(event)">
         <input type="hidden" id="horarioEditIndex" value="-1">
 
@@ -262,8 +199,8 @@
         <div id="contenedorListaHorarios"></div>
     </div>
   </div>
-  
 
+  <!-- OVERLAY Y PANEL DE DETALLE DE MATERIAS -->
   <div class="detail-overlay" id="overlay" onclick="closeDetail()"></div>
   <div class="detail-panel" id="detailPanel">
     <button class="close-btn" onclick="closeDetail()">✕</button>
@@ -282,6 +219,6 @@
     </div>
   </div>
 
+  <script src="js/app.js"></script>
 </body>
-<script src="js/app.js"></script>
 </html>
