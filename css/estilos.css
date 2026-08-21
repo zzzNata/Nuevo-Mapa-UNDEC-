@@ -758,14 +758,9 @@
   }
 
 #agendaSemanal {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-
-    width: 100%;
-    max-width: 1400px;
-
-    margin: 0 auto;
+        grid-template-columns: repeat(5, minmax(180px, 1fr));
+        overflow-x: auto;
+    
   }
 
 .columna-dia {
