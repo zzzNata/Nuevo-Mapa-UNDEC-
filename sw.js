@@ -1,4 +1,4 @@
-const CACHE_NAME = 'undec-dw-v1';
+const CACHE_NAME = 'undec-dw-v2'; // <--- Al cambiar esto, el celular detecta la actualización
 const ASSETS = [
   './',
   './index.html',
@@ -8,8 +8,24 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (e) => {
+  self.skipWaiting(); // Forzar a que el nuevo Service Worker se active de inmediato
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+  );
+});
+
+self.addEventListener('activate', (e) => {
+  // Limpia cachés viejas para que no ocupen espacio ni interfieran
+  e.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    })
   );
 });
 
