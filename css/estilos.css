@@ -758,9 +758,14 @@
   }
 
 #agendaSemanal {
-        grid-template-columns: repeat(5, minmax(180px, 1fr));
-        overflow-x: auto;
-    
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+
+    width: 100%;
+    max-width: 1400px;
+
+    margin: 0 auto;
   }
 
 .columna-dia {
@@ -977,14 +982,6 @@
     background: rgba(255, 107, 53, 0.18);
   }
 
-  @media (max-width: 900px) {
-
-    #agendaSemanal {
-        grid-template-columns: repeat(5, minmax(180px, 1fr));
-        overflow-x: auto;
-    }
-
-  }
 
    /* --- PANEL EDICIÓN DE HORARIOS --- */
 .panel-edicion-overlay {
@@ -1315,4 +1312,55 @@
     margin: 10px auto 20px auto;
   }
 
+}
+
+@media (max-width: 600px) {
+
+  /* Mantener el contenedor de la agenda organizado */
+  #agendaSemanal {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  /* Reestructurar cada tarjeta de día */
+  .columna-dia {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dia-header {
+    font-size: 14px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .dia-contenido {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Ajustar los bloques de clases dentro de cada día */
+  .clase-agenda {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+  }
+
+  .clase-hora {
+    font-size: 11px;
+  }
+
+  .clase-materia {
+    font-size: 13px;
+    margin: 4px 0;
+  }
+
+  .clase-modalidad {
+    font-size: 10px;
+  }
 }
