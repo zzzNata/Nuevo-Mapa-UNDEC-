@@ -1186,11 +1186,14 @@
   color: var(--warn);
 }
 
-  /* Media query para pantallas móviles */
+  /* ==========================================
+   ADAPTACIÓN MOBILE (CONSOLIDADO)
+   ========================================== */
 @media (max-width: 600px) {
 
+  /* --- 1. MENÚ PRINCIPAL --- */
   .opciones-menu {
-    flex-direction: column; /* Apila las tarjetas verticalmente */
+    flex-direction: column;
     align-items: center;
     gap: 20px;
     width: 100%;
@@ -1198,8 +1201,8 @@
 
   .opcion-menu {
     width: 100%;
-    max-width: 280px; /* Ancho cómodo para celus */
-    height: 180px;    /* Altura ajustada */
+    max-width: 280px;
+    height: 180px;
   }
 
   #menuPrincipal h2 {
@@ -1208,16 +1211,13 @@
     margin-bottom: 25px;
   }
 
-}
 
-@media (max-width: 600px) {
-
-  /* 1. Arreglo del encabezado (evita que los botones pisen el texto) */
+  /* --- 2. PANTALLA MATERIAS --- */
   #mapaMaterias header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px; /* Deja espacio para el botón de cerrar sesión arriba */
+    padding-top: 50px;
     position: relative;
   }
 
@@ -1234,27 +1234,34 @@
   }
 
   #mapaMaterias .volver-btn {
-    position: static; /* Pasa abajo del subtítulo en flujo normal */
+    position: static;
     margin-top: 15px;
     width: 100%;
     max-width: 200px;
   }
 
-  /* 2. Apilar las columnas de Año 1 y Año 2 en vertical */
+  /* Liberar ancho mínimo de la grilla */
+  .map-container {
+    padding: 15px 10px;
+    overflow-x: hidden; /* Elimina scroll horizontal sobrante */
+  }
+
   .years-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important; /* IMPORTANTE: Quita los 600px rígidos de escritorio */
+    width: 100% !important;
+    gap: 20px;
   }
 
   .year-col {
-    width: 100%;
+    width: 100% !important;
+    min-width: 0 !important;
   }
 
-  /* 3. Acomodar la barra de estadísticas e indicadores */
   .info-bar {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en lugar de 4 horizontales */
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
@@ -1264,22 +1271,20 @@
     justify-content: center;
     gap: 10px;
   }
-}
 
-@media (max-width: 600px) {
 
-  /* Ajustes para la cabecera de Horarios en Mobile */
+  /* --- 3. PANTALLA HORARIOS --- */
   #pantallaHorarios {
-    padding-top: 20px;
+    padding: 20px 15px;
   }
 
-  /* Contenedor de botones superiores */
+  /* Botones superiores paralelos */
   #pantallaHorarios .volver-btn,
   #pantallaHorarios .cerrarSesion {
-    position: static; /* Quita el posicionamiento flotante/absoluto */
-    display: inline-block;
-    width: 48%; /* Quedan uno al lado del otro arriba del todo */
-    margin-bottom: 20px;
+    position: static !important;
+    display: inline-block !important;
+    width: 48% !important;
+    margin-bottom: 15px !important;
     text-align: center;
     box-sizing: border-box;
   }
@@ -1312,20 +1317,15 @@
     margin: 10px auto 20px auto;
   }
 
-}
-
-@media (max-width: 600px) {
-
-  /* Forzar que las columnas de los días se apilen verticalmente */
+  /* Apilar columnas de días verticalmente */
   #agendaSemanal {
     display: flex !important;
     flex-direction: column !important;
-    grid-template-columns: none !important; /* Desactiva el grid horizontal */
+    grid-template-columns: none !important;
     width: 100% !important;
     gap: 15px;
   }
 
-  /* Asegurar que cada columna ocupe todo el ancho */
   .columna-dia {
     width: 100% !important;
     max-width: 100% !important;
@@ -1333,9 +1333,10 @@
   }
 
   .dia-contenido {
+    min-height: auto !important; /* Quita los 500px vacíos en celus */
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-
 }
