@@ -991,33 +991,7 @@
 
   }
 
-  @media (max-width: 600px) {
-
-    #pantallaHorarios {
-        padding: 30px 15px;
-    }
-
-    .encabezado-horarios h1 {
-        font-size: 26px;
-    }
-
-    #agendaSemanal {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .columna-dia {
-        width: 100%;
-    }
-
-    .dia-contenido {
-        min-height: auto;
-    }
-
-  }
-
-  /* --- PANEL EDICIÓN DE HORARIOS --- */
+   /* --- PANEL EDICIÓN DE HORARIOS --- */
 .panel-edicion-overlay {
   position: fixed;
   inset: 0;
@@ -1218,4 +1192,132 @@
   background: rgba(255, 107, 53, 0.1);
   border: 1px solid var(--warn);
   color: var(--warn);
+}
+
+  /* Media query para pantallas móviles */
+@media (max-width: 600px) {
+
+  .opciones-menu {
+    flex-direction: column; /* Apila las tarjetas verticalmente */
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .opcion-menu {
+    width: 100%;
+    max-width: 280px; /* Ancho cómodo para celus */
+    height: 180px;    /* Altura ajustada */
+  }
+
+  #menuPrincipal h2 {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  /* 1. Arreglo del encabezado (evita que los botones pisen el texto) */
+  #mapaMaterias header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px; /* Deja espacio para el botón de cerrar sesión arriba */
+    position: relative;
+  }
+
+  #mapaMaterias .cerrarSesion {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  #mapaMaterias h1 {
+    font-size: 22px;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  #mapaMaterias .volver-btn {
+    position: static; /* Pasa abajo del subtítulo en flujo normal */
+    margin-top: 15px;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  /* 2. Apilar las columnas de Año 1 y Año 2 en vertical */
+  .years-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+  }
+
+  .year-col {
+    width: 100%;
+  }
+
+  /* 3. Acomodar la barra de estadísticas e indicadores */
+  .info-bar {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en lugar de 4 horizontales */
+    gap: 10px;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  /* Ajustes para la cabecera de Horarios en Mobile */
+  #pantallaHorarios {
+    padding-top: 20px;
+  }
+
+  /* Contenedor de botones superiores */
+  #pantallaHorarios .volver-btn,
+  #pantallaHorarios .cerrarSesion {
+    position: static; /* Quita el posicionamiento flotante/absoluto */
+    display: inline-block;
+    width: 48%; /* Quedan uno al lado del otro arriba del todo */
+    margin-bottom: 20px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .encabezado-horarios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .encabezado-horarios h1 {
+    font-size: 24px;
+    margin: 8px 0;
+  }
+
+  .encabezado-horarios .tag {
+    font-size: 10px;
+  }
+
+  .encabezado-horarios .subtitle {
+    font-size: 11px;
+    margin-bottom: 15px;
+  }
+
+  .boton-editar-horarios {
+    width: 100%;
+    max-width: 250px;
+    margin: 10px auto 20px auto;
+  }
+
 }
