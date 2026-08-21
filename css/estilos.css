@@ -1316,51 +1316,26 @@
 
 @media (max-width: 600px) {
 
-  /* Mantener el contenedor de la agenda organizado */
+  /* Forzar que las columnas de los días se apilen verticalmente */
   #agendaSemanal {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important; /* Desactiva el grid horizontal */
+    width: 100% !important;
     gap: 15px;
-    width: 100%;
-    margin-top: 20px;
   }
 
-  /* Reestructurar cada tarjeta de día */
+  /* Asegurar que cada columna ocupe todo el ancho */
   .columna-dia {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box;
   }
 
-  .dia-header {
-    font-size: 14px;
-    padding: 10px;
-    text-align: center;
-  }
-
   .dia-contenido {
-    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  /* Ajustar los bloques de clases dentro de cada día */
-  .clase-agenda {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-  }
-
-  .clase-hora {
-    font-size: 11px;
-  }
-
-  .clase-materia {
-    font-size: 13px;
-    margin: 4px 0;
-  }
-
-  .clase-modalidad {
-    font-size: 10px;
-  }
 }
