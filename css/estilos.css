@@ -1321,9 +1321,9 @@
   #agendaSemanal {
     display: flex !important;
     flex-direction: column !important;
-    grid-template-columns: none !important;
     width: 100% !important;
     gap: 15px;
+    overflow-x: hidden; /* Evita scroll horizontal innecesario */
   }
 
   .columna-dia {
