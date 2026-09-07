@@ -4,14 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mapa interactivo de correlativas y agenda de horarios/evaluaciones para la Tecnicatura en Desarrollo Web de la UNdeC. PWA offline.">
   <title>Mapa de Correlativas – Tecnicatura en Desarrollo Web</title>
-  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login-menu.css">
+  <link rel="stylesheet" href="css/mapa.css">
+  <link rel="stylesheet" href="css/horarios.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#070d1a">
 </head>
 
 <body>
 
+  <!-- ═══════════ PANTALLA: LOGIN / REGISTRO DE ALUMNO ═══════════ -->
   <div id="pantallaLogin">
     <div id="loginCard">
       <div class="tag">UNdeC — Universidad Nacional de Chilecito</div>
@@ -31,6 +37,7 @@
     </div>
   </div>
 
+  <!-- ═══════════ PANTALLA: MENÚ PRINCIPAL ═══════════ -->
   <div id="menuPrincipal">
     <button class="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
     <h2>¿Qué querés consultar?</h2>
@@ -46,6 +53,7 @@
     </div>
   </div>
 
+  <!-- ═══════════ PANTALLA: MAPA DE CORRELATIVAS ═══════════ -->
   <div id="mapaMaterias">
     <div class="scan-line"></div>
     <header>
@@ -101,6 +109,7 @@
     </div>
   </div>
 
+  <!-- ═══════════ PANTALLA: HORARIOS (AGENDA + CALENDARIO) ═══════════ -->
   <div id="pantallaHorarios">
     <button class="volver-btn" onclick="volverMenu()">← Volver</button>
     <button class="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
@@ -120,30 +129,10 @@
         </button>
     </div>
 
-    <div id="agendaSemanal">
-        <div class="columna-dia">
-            <div class="dia-header">Lunes</div>
-            <div class="dia-contenido" data-dia="Lunes"></div>
-        </div>
-        <div class="columna-dia">
-            <div class="dia-header">Martes</div>
-            <div class="dia-contenido" data-dia="Martes"></div>
-        </div>
-        <div class="columna-dia">
-            <div class="dia-header">Miércoles</div>
-            <div class="dia-contenido" data-dia="Miércoles"></div>
-        </div>
-        <div class="columna-dia">
-            <div class="dia-header">Jueves</div>
-            <div class="dia-contenido" data-dia="Jueves"></div>
-        </div>
-        <div class="columna-dia">
-            <div class="dia-header">Viernes</div>
-            <div class="dia-contenido" data-dia="Viernes"></div>
-        </div>
-    </div>
+    <!-- Columnas generadas por js/horarios.js → construirAgendaSemanal() -->
+    <div id="agendaSemanal"></div>
 
-    <div id="vistaCalendario" style="display: none;">
+    <div id="vistaCalendario">
       <div class="calendario-header">
         <button onclick="cambiarMes(-1)">◄</button>
         <h2 id="calTituloMes">Mes Año</h2>
@@ -156,6 +145,7 @@
     </div>
   </div>
 
+  <!-- ═══════════ PANEL ADMINISTRACIÓN: CLASES Y EVALUACIONES ═══════════ -->
   <div class="panel-edicion-overlay" id="overlayHorarios" onclick="cerrarPanelEdicionHorarios()"></div>
 
   <div class="panel-edicion-horarios" id="modalEdicionHorarios">
@@ -167,6 +157,7 @@
     </div>
 
     <form id="formHorario" onsubmit="guardarHorario(event)">
+        <h2 id="tituloFormHorario">// AGREGAR NUEVA CLASE</h2>
         <input type="hidden" id="horarioEditIndex" value="-1">
 
         <div class="form-group">
@@ -253,6 +244,7 @@
     </div>
   </div>
 
+  <!-- ═══════════ MODAL: DETALLE DE MATERIA ═══════════ -->
   <div class="detail-overlay" id="overlay" onclick="closeDetail()"></div>
   <div class="detail-panel" id="detailPanel">
     <button class="close-btn" onclick="closeDetail()">✕</button>
@@ -271,6 +263,12 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <!-- ═══════════ MÓDULOS (orden de carga = dependencias) ═══════════ -->
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/mapa.js"></script>
+  <script src="js/horarios.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
