@@ -1,4 +1,4 @@
-const CACHE_NAME = 'undec-dw-v5';
+const CACHE_NAME = 'undec-dw-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -41,6 +41,13 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
+  // Permitir que las solicitudes de analytics pasen sin caché
+  if (e.request.url.includes('vercel-insights') || 
+      e.request.url.includes('/_vercel/') ||
+      e.request.url.includes('vitals.vercel-analytics.com')) {
+    return; // No interceptar, dejar que el navegador maneje directamente
+  }
+  
   e.respondWith(
     caches.match(e.request).then((response) => response || fetch(e.request))
   );
